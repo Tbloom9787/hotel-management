@@ -12,11 +12,24 @@ app.use(express.json());
 app.use(cors());
 
 // DB Config
-mongoose.connect('mongodb://127.0.0.1:27017/hoteldb', { useNewUrlParser: true });
+const connection_url =
+  'mongodb+srv://dbUser:C8-eGhpqWXUwzWr@cluster0.tln7g.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
 
-const connection = mongoose.connection;
-connection.once('open', function () {
+mongoose.connect(connection_url, {
+  useCreateIndex: true,
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
+
+const db = mongoose.connection;
+
+db.once('open', function () {
   console.log('MongoDB database connection established successfully');
+});
+
+// Routes
+app.get('/hotel', (req, res) => {
+  console.log('WOOOO');
 });
 
 // Listen
