@@ -2,6 +2,7 @@
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
+const guestsRouter = require('./routes/guests');
 
 // Config
 const app = express();
@@ -10,6 +11,7 @@ const port = process.env.PORT || 8000;
 // Middleware
 app.use(express.json());
 app.use(cors());
+app.use('/guests', guestsRouter);
 
 // DB Config
 const connection_url =
