@@ -1,5 +1,4 @@
 const route = require('express').Router();
-
 const guestController = require('../controllers/guest');
 
 route.get('/', guestController.getAllGuests);
