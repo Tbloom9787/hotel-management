@@ -13,7 +13,7 @@ import { Box, Flex } from '@chakra-ui/layout';
 import React, {useEffect, useState}from 'react';
 import { useRouter } from 'next/router';
 
-import Layout from '../../components/Layout';
+import Layout from '../components/Layout';
 
 const currentGuests = () => {
   const router = useRouter();
