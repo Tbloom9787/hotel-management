@@ -2,7 +2,9 @@
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
-const guestsRouter = require('./routes/guests');
+
+require('./models/room.model');
+require('./models/guest.model');
 
 // Config
 const app = express();
@@ -11,7 +13,6 @@ const port = process.env.PORT || 8000;
 // Middleware
 app.use(express.json());
 app.use(cors());
-app.use('/guests', guestsRouter);
 
 // DB Config
 const connection_url =
@@ -21,18 +22,19 @@ mongoose.connect(connection_url, {
   useCreateIndex: true,
   useNewUrlParser: true,
   useUnifiedTopology: true,
-});
-
-const db = mongoose.connection;
-
-db.once('open', function () {
-  console.log('MongoDB database connection established successfully');
-});
+}).then(() => {
+  console.log('MongoDB database connection established successfully')
+}).catch(err => {
+  console.error(err);
+})
 
 // Routes
-app.get('/hotel', (req, res) => {
-  console.log('WOOOO');
+app.use('/rooms', require('./routes/room'));
+app.use('/guests', require('./routes/guest'));
+app.use('/', async (req, res) => {
+  res.status(200).send('Welcome to the hotel management system');
 });
+
 
 // Listen
 app.listen(port, () => console.log(`Listening on localhost:${port}`));

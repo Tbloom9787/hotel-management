@@ -10,14 +10,27 @@ import {
   Heading,
 } from '@chakra-ui/react';
 import { Box, Flex } from '@chakra-ui/layout';
-import React from 'react';
+import React, {useEffect, useState}from 'react';
 import { useRouter } from 'next/router';
 
 import Layout from '../../components/Layout';
 
 const currentGuests = () => {
   const router = useRouter();
-  console.log(router);
+  const [guests, setGuests] = useState()
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('/');
+        setGuests(response);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+    fetchData();
+  }, [setGuests]);
+
   return (
     <Layout>
       <Heading size='4xl' mb={10}>
