@@ -12,8 +12,8 @@ exports.getAllRooms = async (req, res) => {
 
 exports.getRoom = async (req, res) => {
   try {
-    console.log(req.query);
-    const room = await Room.getRoombyId(req.query.roomid);
+    console.log(req.params);
+    const room = await Room.getRoombyId(req.params.id);
     if (!room) {
       throw new Error('Room not found');
     }
