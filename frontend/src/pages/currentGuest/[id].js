@@ -40,12 +40,12 @@ const currentGuests = () => {
     guestLastName: '',
     guestCheckIn: '',
     guestCheckOut: '',
+    roomTotal: '',
   });
   
   const onChange = (e) => {
     setFieldValues({ ...fieldValues, [e.target.name]: e.target.value })
   }
-
   useEffect(() => {
     const fetchData = async () => {
       if (!router.isReady) return;
@@ -61,6 +61,7 @@ const currentGuests = () => {
               guestLastName: res.data.guestLast,
               guestCheckIn: res.data.checkIn,
               guestCheckOut: res.data.checkOut,
+              roomTotal: res.data.total,
             })
           })
           .catch((err) => {
@@ -70,9 +71,8 @@ const currentGuests = () => {
         console.error(err);
       }
     };
-    console.log('safemoon to the moon');
     fetchData();
-  }, [setRoom, setBalance, setPaymentMade, temp, router.isReady]);
+  }, [setRoom, setBalance, setPaymentMade, setFieldValues, temp, router.isReady]);
 
   return (
     <Layout>
@@ -112,19 +112,67 @@ const currentGuests = () => {
                   <Tbody>
                     <Tr>
                       <Td>First Name:</Td>
-                      {edit ? <Td><Input name='guestFirstName' placeholder={fieldValues.guestFirstName} value={fieldValues.guestFirstName} onChange={onChange} size='xs'/></Td> : <Td>{room.guestFirst}</Td>}
+                      {edit ? (
+                        <Td>
+                          <Input
+                            name='guestFirstName'
+                            placeholder={fieldValues.guestFirstName}
+                            value={fieldValues.guestFirstName}
+                            onChange={onChange}
+                            size='xs'
+                          />
+                        </Td>
+                      ) : (
+                        <Td>{room.guestFirst}</Td>
+                      )}
                     </Tr>
                     <Tr>
                       <Td>Last Name:</Td>
-                      {edit ? <Td><Input name='guestLastName' placeholder={fieldValues.guestLastName} value={fieldValues.guestLastName} onChange={onChange} size='xs' /></Td> : <Td>{room.guestLast}</Td>}
+                      {edit ? (
+                        <Td>
+                          <Input
+                            name='guestLastName'
+                            placeholder={fieldValues.guestLastName}
+                            value={fieldValues.guestLastName}
+                            onChange={onChange}
+                            size='xs'
+                          />
+                        </Td>
+                      ) : (
+                        <Td>{room.guestLast}</Td>
+                      )}
                     </Tr>
                     <Tr>
                       <Td>Check-in Date:</Td>
-                      {edit ? <Td><Input name='guestCheckIn' placeholder={fieldValues.guestCheckIn} value={fieldValues.guestCheckIn} onChange={onChange} size='xs'/></Td> : <Td>{room.checkIn}</Td>}
+                      {edit ? (
+                        <Td>
+                          <Input
+                            name='guestCheckIn'
+                            placeholder={fieldValues.guestCheckIn}
+                            value={fieldValues.guestCheckIn}
+                            onChange={onChange}
+                            size='xs'
+                          />
+                        </Td>
+                      ) : (
+                        <Td>{room.checkIn}</Td>
+                      )}
                     </Tr>
                     <Tr>
                       <Td>Check-out Date:</Td>
-                      {edit ? <Td><Input name='guestCheckOut' placeholder={fieldValues.guestCheckOut} value={fieldValues.guestCheckOut} onChange={onChange} size='xs'/></Td> : <Td>{room.checkOut}</Td>}
+                      {edit ? (
+                        <Td>
+                          <Input
+                            name='guestCheckOut'
+                            placeholder={fieldValues.guestCheckOut}
+                            value={fieldValues.guestCheckOut}
+                            onChange={onChange}
+                            size='xs'
+                          />
+                        </Td>
+                      ) : (
+                        <Td>{room.checkOut}</Td>
+                      )}
                     </Tr>
                     <Tr>
                       <Td>Room Number:</Td>
@@ -140,7 +188,22 @@ const currentGuests = () => {
                     </Tr>
                     <Tr>
                       <Td>Total Charge:</Td>
-                      <Td>${room.total}.00</Td>
+                      <Td>
+                        {' '}
+                        {edit ? (
+                          <Td>
+                            <Input
+                              name='roomTotal'
+                              placeholder={fieldValues.roomTotal}
+                              value={fieldValues.roomTotal}
+                              onChange={onChange}
+                              size='md'
+                            />
+                          </Td>
+                        ) : (
+                          <Td>${room.total}.00</Td>
+                        )}
+                      </Td>
                     </Tr>
                     <Tr>
                       <Td>Payments Made:</Td>
@@ -191,9 +254,22 @@ const currentGuests = () => {
           </Flex>
         </>
       )}
-      <Button onClick={() => setEdit((prevEdit) => !prevEdit)}>edit</Button>
+      <Button onClick={() => setEdit((prevEdit) => !prevEdit)}>Edit</Button>
       <Button onClick={() => setTemp(temp + 1)}>temp {temp}</Button>
-      <Button onClick={() => console.log(fieldValues)}>submit</Button>
+      <Button
+        onClick={() =>
+          axios.patch(`http://localhost:8000/rooms/${router.query.id}`,
+          {
+            guestFirst: fieldValues.guestFirstName,
+            guestLast: fieldValues.guestLastName,
+            checkIn: fieldValues.guestCheckIn,
+            checkOut: fieldValues.guestCheckOut,
+            total: fieldValues.roomTotal,
+          })
+        }
+      >
+        Submit
+      </Button>
     </Layout>
   );
 };
