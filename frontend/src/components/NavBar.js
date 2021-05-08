@@ -17,6 +17,9 @@ const NavBar = ({}) => {
           <NextLink href='/welcome'>
             <Link mr={10}>Welcome</Link>
           </NextLink>
+          <NextLink href='/reservations'>
+            <Link>Reservations</Link>
+          </NextLink>
           <NextLink href='/rooms'>
             <Link mr={10}>Rooms</Link>
           </NextLink>

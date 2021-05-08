@@ -58,15 +58,42 @@ const fakeData = [
                 <Heading pb={2}>Room {r.roomNumber}</Heading>
                   <Box w='200px' h ='550px'>
                     <Stack mt={4} spacing={4} direction="column" align="left">
-                    <th align='left'>First Name: {r.FirstName}</th>
-                    <th align='left'>Last Name: {r.LastName}</th>
-                    <th align='left'>Date Created: {r.DateMade}</th>
-                    <th align='left'>Check In: {r.CheckIn}</th>
-                    <th align='left'>Check Out: {r.CheckOut}</th>
-                    <th align='left'>Room Type: {r.RoomType}</th>
-                    <th align='left'>Website: {r.Website}</th>
-                    <th align='left'>Daily Rate: {r.DailyRate}</th>
-                    <th align='left'>Total: {r.TotalCharge}</th>
+                   
+                    <form id="formAddUser" name="adduser" method="post" action="/adduser" align='left'>
+                    <input id='inputUserName' type = 'text' placeholder ='First Name' name ='First Name' align='left' margin-bottom={10}></input>
+                    </form>
+
+                    <form id="formAddUser" name="adduser" method="post" action="/adduser" align='left'>
+                    <input id='inputUserName' type = 'text' placeholder ='Last Name' name ='Last Name' align='left'></input>
+                    </form>
+
+                    <form id="formAddUser" name="adduser" method="post" action="/adduser" align='left'>
+                    <input id='inputUserName' type = 'text' placeholder ="Today's Date" name ='Date Created' align='left'></input>
+                    </form>
+
+                    <form id="formAddUser" name="adduser" method="post" action="/adduser" align='left'>
+                    <input id='inputUserName' type = 'text' placeholder ='Check In' name ='Check In' align='left'></input>
+                    </form>
+                    
+                    <form id="formAddUser" name="adduser" method="post" action="/adduser" align='left'>
+                    <input  id='inputUserName' type = 'text' placeholder ='Check Out' name ='Check Out' align='left'></input>
+                    </form>
+
+                    <form id="formAddUser" name="adduser" method="post" action="/adduser" align='left'>
+                    <input  id='inputUserName' type = 'text' placeholder ='Room Type' name ='Room Type' align='left'></input>
+                    </form>
+
+                    <form id="formAddUser" name="adduser" method="post" action="/adduser" align='left'>
+                    <input  id='inputUserName' type = 'text' placeholder ='Website' name ='Website' align='left'></input>
+                    </form>
+                    
+                    <form id="formAddUser" name="adduser" method="post" action="/adduser" align='left'>
+                    <input  id='inputUserName' type = 'text' placeholder ='Daily Rate' name ='Daily Rate' align='left'></input>
+                    </form>
+                    
+                    <form id="formAddUser" name="adduser" method="post" action="/adduser" align='left'>
+                    <input id='inputUserName' type = 'text' name ='Total' align='left'></input>
+                    </form>
                     <Button p={5} pb={5} colorScheme='green'
                         onClick={() => Toast({
                           title: 'Add Reservation.',
