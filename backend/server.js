@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 
 require('./models/room.model');
 require('./models/guest.model');
+require('./models/housekeeper.model');
 
 // Config
 const app = express();

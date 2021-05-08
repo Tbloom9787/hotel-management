@@ -31,7 +31,7 @@ const NavBar = ({}) => {
           </NextLink>
           <NextLink
             href='/currentGuest/[id]'
-            as={`/currentGuest/${'6095f39b7e2f3d3d99e090f2'}`}
+            as={`/currentGuest/${'609648face4b016eba0e1a2d'}`}
           >
             <Link>Current Guest Information</Link>
           </NextLink>
