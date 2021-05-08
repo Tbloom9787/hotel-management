@@ -8,17 +8,18 @@ import {
   Tbody,
   Td,
   Heading,
+  Button,
+  Text,
 } from '@chakra-ui/react';
 import { Box, Flex } from '@chakra-ui/layout';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useRouter } from 'next/router';
 
 import Layout from '../components/Layout';
 
 const Guests = () => {
-  const router = useRouter();
   const [guests, setGuests] = useState(false);
+  const [counter, setCounter] = useState(0);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -40,13 +41,96 @@ const Guests = () => {
 
   return (
     <Layout>
-      {guests &&
+      <Heading size='4xl' mb={10} textAlign='center'>
+        Guests Information
+      </Heading>
+      {guests[counter] && (
+        <>
+          <Flex justifyContent='center'>
+            <Box
+              maxW='sm'
+              borderWidth='1px'
+              borderRadius='lg'
+              overflow='hidden'
+            >
+              <Flex justifyContent='center'>
+                <WrapItem pt='6'>
+                  <Avatar
+                    size='2xl'
+                    name={guests[counter].firstName}
+                    // src='https://bit.ly/broken-link'
+                  />
+                </WrapItem>
+              </Flex>
+              <Box d='flex' p='6' alignItems='baseline'>
+                <Table variant='simple'>
+                  <Thead>
+                    <Tr>
+                      <Th>Guest</Th>
+                      <Th>Information</Th>
+                    </Tr>
+                  </Thead>
+                  <Tbody>
+                    <Tr>
+                      <Td>First Name:</Td>
+                      <Td>{guests[counter].firstName}</Td>
+                    </Tr>
+                    <Tr>
+                      <Td>Last Name:</Td>
+                      <Td>{guests[counter].lastName}</Td>
+                    </Tr>
+                    <Tr>
+                      <Td>Email:</Td>
+                      <Td>{guests[counter].email}</Td>
+                    </Tr>
+                    <Tr>
+                      <Td>Phone:</Td>
+                      <Td>{guests[counter].phone}</Td>
+                    </Tr>
+                    <Tr>
+                      <Td>Address:</Td>
+                      <Td>{guests[counter].address}</Td>
+                    </Tr>
+                    <Tr>
+                      <Td>ID:</Td>
+                      <Td>{guests[counter].stateID}</Td>
+                    </Tr>
+                    <Tr>
+                      <Td>License Plate:</Td>
+                      <Td>{guests[counter].licensePlate}</Td>
+                    </Tr>
+                  </Tbody>
+                </Table>
+              </Box>
+            </Box>
+          </Flex>
+          <Flex justifyContent='center'>
+            <Button
+              onClick={() => {
+                if (counter > 0) {
+                  setCounter(counter - 1);
+                }
+                console.log('clicked', counter);
+              }}
+            >
+              click me to go back
+            </Button>
+            <Button
+              onClick={() => {
+                if (counter < guests.length - 1) {
+                  setCounter(counter + 1);
+                }
+                console.log('clicked', counter);
+              }}
+            >
+              click me forward
+            </Button>
+          </Flex>
+        </>
+      )}
+      {/* {guests &&
         guests.map((guest) => {
           return (
-            <>
-              <Heading size='4xl' mb={10}>
-                Guest Profile Information
-              </Heading>
               <div key={guest.id}>
                 <Flex>
                   <Box
@@ -107,9 +191,8 @@ const Guests = () => {
                   </Box>
                 </Flex>
               </div>
-            </>
           );
-        })}
+        })} */}
     </Layout>
   );
 };
