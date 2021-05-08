@@ -1,16 +1,6 @@
 const mongoose = require('mongoose');
 const Guest = mongoose.model('Guests');
 
-exports.getGuest = async (req, res) => {
-  const { id } = req.params;
-  try {
-    const guest = await Guest.findById(id);
-    res.status(200).json(guest);
-  } catch (e) {
-    res.status(400).json(e);
-  }
-};
-
 exports.getAllGuests = async (req, res) => {
     try {
         const guests = await Guest.find({});
@@ -18,6 +8,18 @@ exports.getAllGuests = async (req, res) => {
     } catch (e) {
         res.status(400).json(e);
     }
+};
+
+exports.getGuest = async (req, res) => {
+  try {
+    const guest = await Guest.getGuestbyId(req.query.id);
+    if (!guest) {
+      throw new Error('Guest not found');
+    }
+    res.status(200).json(guest);
+  } catch (e) {
+    res.status(400).json(e);
+  }
 };
 
 exports.addGuest = async (req, res) => {
