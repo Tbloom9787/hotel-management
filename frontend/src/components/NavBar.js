@@ -17,6 +17,12 @@ const NavBar = ({}) => {
           <NextLink href='/welcome'>
             <Link mr={10}>Welcome</Link>
           </NextLink>
+          <NextLink href='/rooms'>
+            <Link mr={10}>Rooms</Link>
+          </NextLink>
+          <NextLink href='/weeklyRooms'>
+            <Link mr={10}>Week</Link>
+          </NextLink>
           <NextLink href='/housekeeping'>
             <Link mr={10}>Housekeeping</Link>
           </NextLink>
