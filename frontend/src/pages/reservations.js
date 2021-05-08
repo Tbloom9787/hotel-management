@@ -1,5 +1,6 @@
 import React from 'react';
 import Layout from '../components/Layout';
+import NextLink from 'next/link';
 import {
   Box,
   Button,
@@ -15,85 +16,30 @@ import {
   Stack,
   useToast,
   StackItem,
+  FormControl,
+  FormLabel,
+  FormErrorMessage,
+  FormHelperText,
+  Input,
+  Link,
 } from '@chakra-ui/react';
-import { isDynamicRoute } from 'next/dist/next-server/lib/router/utils';
 //if not highlighted, then not used
-
-const fakeData = [
-  {
-    id: 1,
-    FirstName: 'John',
-    LastName: 'Adams',
-    DateMade: '05/06/2021',
-    CheckIn: '06/04/2021',
-    CheckOut: '06/10/2021',
-    RoomType: 'Deluxe Suite',
-    RoomNumber: '007',
-    Website: 'www.expedia.com',
-    DailyRate: '$200',
-    TotalCharge: '$1400',
-  }
-];
- //https://chakra-ui.com/docs/form/checkbox
+//https://chakra-ui.com/docs/form/checkbox
 
 
- const Reservations = () => {
-  
-    const [checkedItems, setCheckedItems] = React.useState([false, false])
-    const Toast = useToast()
-    const statuses = ['success', 'error', 'warning', 'info']
-    const allChecked = checkedItems.every(Boolean)
-    const isIndeterminate = checkedItems.some(Boolean) && !allChecked
-  return (
+const Reservations = () => {
+  return(
     <Layout>
-      <Heading size='4xl' mb={10}>
+      <Heading size='4xl' mb={5}>
         Reservations
       </Heading>
       <SimpleGrid columns={3} spacing='60px'>
-        {fakeData.map((r) => {
-          return (
-            <VStack key={r.id} h='auto' maxW='sm' spacing='24px'>
+            <VStack h='auto' maxW='sm' spacing='24px'>
             <Flex>
               <Box p={5} shadow='md' borderWidth='1px' bg ='blue.100'>
-                <Heading pb={2}>Room {r.roomNumber}</Heading>
-                  <Box w='200px' h ='550px'>
+                <Heading pb={2}>Available Rooms (100)</Heading>
+                  <Box w='200px' h ='850px' pb={5} mb={5}>
                     <Stack mt={4} spacing={4} direction="column" align="left">
-                   
-                    <form id="formAddUser" name="adduser" method="post" action="/adduser" align='left'>
-                    <input id='inputUserName' type = 'text' placeholder ='First Name' name ='First Name' align='left' margin-bottom={10}></input>
-                    </form>
-
-                    <form id="formAddUser" name="adduser" method="post" action="/adduser" align='left'>
-                    <input id='inputUserName' type = 'text' placeholder ='Last Name' name ='Last Name' align='left'></input>
-                    </form>
-
-                    <form id="formAddUser" name="adduser" method="post" action="/adduser" align='left'>
-                    <input id='inputUserName' type = 'text' placeholder ="Today's Date" name ='Date Created' align='left'></input>
-                    </form>
-
-                    <form id="formAddUser" name="adduser" method="post" action="/adduser" align='left'>
-                    <input id='inputUserName' type = 'text' placeholder ='Check In' name ='Check In' align='left'></input>
-                    </form>
-                    
-                    <form id="formAddUser" name="adduser" method="post" action="/adduser" align='left'>
-                    <input  id='inputUserName' type = 'text' placeholder ='Check Out' name ='Check Out' align='left'></input>
-                    </form>
-
-                    <form id="formAddUser" name="adduser" method="post" action="/adduser" align='left'>
-                    <input  id='inputUserName' type = 'text' placeholder ='Room Type' name ='Room Type' align='left'></input>
-                    </form>
-
-                    <form id="formAddUser" name="adduser" method="post" action="/adduser" align='left'>
-                    <input  id='inputUserName' type = 'text' placeholder ='Website' name ='Website' align='left'></input>
-                    </form>
-                    
-                    <form id="formAddUser" name="adduser" method="post" action="/adduser" align='left'>
-                    <input  id='inputUserName' type = 'text' placeholder ='Daily Rate' name ='Daily Rate' align='left'></input>
-                    </form>
-                    
-                    <form id="formAddUser" name="adduser" method="post" action="/adduser" align='left'>
-                    <input id='inputUserName' type = 'text' name ='Total' align='left'></input>
-                    </form>
                     <Button p={5} pb={5} colorScheme='green'
                         onClick={() => Toast({
                           title: 'Add Reservation.',
@@ -105,6 +51,46 @@ const fakeData = [
                       >
                         Add
                       </Button>
+                      <FormControl id="first-name" isRequired> 
+                      <FormLabel>First name</FormLabel>
+                      <Input placeholder="First name" />
+                      </FormControl>
+
+                      <FormControl id="last-name" isRequired> 
+                      <FormLabel>Last name</FormLabel>
+                      <Input placeholder="Last name" />
+                      </FormControl>
+
+                      <FormControl id="Date Created" isRequired> 
+                      <FormLabel>First name</FormLabel>
+                      <Input placeholder="Today's Date" />
+                      </FormControl>
+
+                      <FormControl id="Check In" isRequired> 
+                      <FormLabel>First name</FormLabel>
+                      <Input placeholder="Check In" />
+                      </FormControl>
+
+                      <FormControl id="Check Out" isRequired> 
+                      <FormLabel>First name</FormLabel>
+                      <Input placeholder="Check Out" />
+                      </FormControl>
+
+                      <FormControl id="Room Type" isRequired> 
+                      <FormLabel>First name</FormLabel>
+                      <Input placeholder="Room Type" />
+                      </FormControl>
+
+                      <FormControl id="Website" isRequired> 
+                      <FormLabel>First name</FormLabel>
+                      <Input placeholder="Website" />
+                      </FormControl>
+
+                      <FormControl id="Daily Rate" isRequired> 
+                      <FormLabel>First name</FormLabel>
+                      <Input placeholder="Daily Rate" />
+                      </FormControl>
+
                       <Button p={5} pb={5} colorScheme='red'
                         onClick={() => Toast({
                           title: 'Deleted',
@@ -116,25 +102,19 @@ const fakeData = [
                       >
                         Delete
                       </Button>
+                      <NextLink href='/currentGuest/6095f39b7e2f3d3d99e090f2'>
+                    <Link>
                       <Button p={5} pb={5} colorScheme='blue'
-                        onClick={() => Toast({
-                          title: 'Submitted.',
-                          description: 'Reservation has been submitted.',
-                          status: 'info',
-                          duration: 9000,
-                          isClosable: true,
-                        })}
                       >
                         Submit
                       </Button>
+                      </Link>
+                      </NextLink>
                   </Stack>
                 </Box>
             </Box>
             </Flex>
           </VStack>
-          );
-        })}
-        
       </SimpleGrid>
     </Layout>
   );
