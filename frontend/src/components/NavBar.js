@@ -14,9 +14,6 @@ const NavBar = ({}) => {
           </Link>
         </NextLink>
         <Flex ml='auto' d='flex' justifyContent='space-between'>
-          <NextLink href='/welcome'>
-            <Link mr={10}>Welcome</Link>
-          </NextLink>
           <NextLink href='/reservations'>
             <Link mr={10}>Reservations</Link>
           </NextLink>
